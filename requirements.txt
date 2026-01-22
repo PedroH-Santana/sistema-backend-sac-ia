@@ -1,5 +1,6 @@
 pydantic==2.12.5
 fastapi[standart]
-google-genai==3.0.0
+google-genai
+
 
 
