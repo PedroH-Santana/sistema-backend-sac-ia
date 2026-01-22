@@ -31,8 +31,7 @@ Siga os passos abaixo para colocar o ambiente a funcionar:
 ### 1. Clonar o repositório
 
 ```bash
-git clone https://github.com/pedroh-santana/sistema-backend-sac-ia.git
-cd sistema-backend-sac-ia
+git clone https://github.com/PedroH-Santana/sistema-backend-sac-ia
 
 ```
 
@@ -42,8 +41,8 @@ Para isolar as dependências do projeto:
 
 ```bash
 # Windows
-python -m venv venv
-venv\Scripts\activate
+python -m venv .venv
+.\.venv\Scripts\activate
 
 # Linux/Mac
 python3 -m venv venv
@@ -56,7 +55,7 @@ source venv/bin/activate
 Crie um ficheiro `requirements.txt` com o conteúdo abaixo ou instale manualmente:
 
 ```bash
-pip install fastapi uvicorn python-dotenv google-genai pydantic
+pip install fastapi fastapi[standard] google-genai pydantic
 
 ```
 
@@ -65,7 +64,8 @@ pip install fastapi uvicorn python-dotenv google-genai pydantic
 O sistema necessita de uma chave de API do Google para funcionar.
 
 1. Crie um ficheiro chamado `.env` na raiz do projeto.
-2. Adicione a sua chave de API (conforme esperado pela biblioteca `google-genai`):
+2. Crie uma chave no site do [Google AI Studio](https://aistudio.google.com/api-keys)
+3. Adicione a sua chave de API (conforme esperado pela biblioteca `google-genai`):
 
 ```env
 GOOGLE_API_KEY="A_SUA_CHAVE_API_AQUI"
@@ -81,7 +81,7 @@ GEMINI_API_KEY="A_SUA_CHAVE_API_AQUI"
 Para iniciar o servidor de desenvolvimento, execute o seguinte comando no terminal:
 
 ```bash
-uvicorn main:app --reload
+fastapi dev main.py
 
 ```
 
@@ -107,7 +107,9 @@ O endpoint espera um corpo JSON. Apenas o campo `texto` é obrigatório (o ID e 
 
 ```json
 {
-  "texto": "O meu produto chegou completamente partido e preciso de uma troca urgente!"
+  "texto": "O meu produto chegou completamente partido e preciso de uma troca urgente!", (Seu texto aqui)
+  "remetente_id": 2430, (ID gerado aleatoriamente pela biblioteca Random)
+  "horario": "15:07:48.471081" (Horário atualizado pela biblioteca Datetime)
 }
 
 ```
