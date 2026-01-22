@@ -1,19 +1,20 @@
-
 from dotenv import load_dotenv
 from google import genai
 
 load_dotenv()
 
-
+# Inicializa o cliente GenAI
 try:
     client = genai.Client()
 except Exception as e:
     client = None
 
+# Função para classificar mensagens usando o modelo Gemini
 def classificar_mensagem(mensagem: str):
         if client == None:
             return "Erro ao conectar ao serviço de IA." 
         else:
+            # Chama o modelo Gemini para classificar a mensagem
             try:
                 response = client.models.generate_content(
                 model="gemini-2.5-flash",
